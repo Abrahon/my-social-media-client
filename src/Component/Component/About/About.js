@@ -12,22 +12,22 @@ const About = () => {
     }, [])
 
 
-
-
     return (
         <div>
             <h1 className="text-3xl ">Total user information:{about.length}</h1>
-            <div className="overflow-x-auto">
-                <table className="table w-full m-5">
+            <div className="overflow-x-autoh-[600px] flex justify-center items-center drop-shadow-2xl">
+                <table className="table w-96 w-[1000px] flex justify-center   m-5">
 
                     <thead>
                         <tr>
-                            {/* <th></th> */}
+                            
                             <th>Name</th>
                             <th>University</th>
                             <th>Email</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
+                    
                     <tbody className=''>
                         {
                             about?.map((info, i) => <AboutRow
@@ -35,9 +35,7 @@ const About = () => {
                                 key={info._id}
                                 info={info}
                             ></AboutRow>)
-
                         }
-
                     </tbody>
                 </table>
             </div>

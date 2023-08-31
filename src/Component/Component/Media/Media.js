@@ -1,35 +1,42 @@
-import { FaComment, FaFacebook, FaHeart, FaHeartBroken } from 'react-icons/fa';
+import { FaComment, FaHeart } from 'react-icons/fa';
 
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-
-
+import { useState } from 'react';
 
 const Media = () => {
-    // const {image}=useState([])
+
+    const[like,setLike] = useState(0)
+    const[isLike,setIsLike] = useState(false)
+    
     const { data: statusOptions, image, post} = useQuery({
         queryKey: ['statusOptions'],
         queryFn: async () => {
             try {
                 const res = await fetch('https://social-media-server-chi.vercel.app/statusOptions', {
                     headers: {
-
                     }
-
                 });
                 const data = await res.json();
                 return data;
-
             }
             catch (error) {
-
             }
         }
+        
     })
+    const onLikeHandle = event=>{
+        // console.log(onLikeHandle)
+        setLike (like + (isLike?-1:1));
+        setIsLike(!isLike)
+
+    }
+
     return (
-        <div className=''>
+     <section className='container'>
+           <div className=''>
             <h2 className='text-3xl'>total status:{statusOptions?.length}</h2>
             <div className=' flex justify-center items-center mt-10 mb-10 drop-shadow-2xl'>
                 <thead>
@@ -37,30 +44,33 @@ const Media = () => {
                 </thead>
                 <div className='grid gap-6 '>
                     {
-                        statusOptions?.map((statusOption, i) => <div className="card card-compact w-96 bg-base-100" key={statusOption._id}>
+                        statusOptions?.map((statusOption, i) => <div className="card card-compact w-1/2   bg-base-100 mx-auto" key={statusOption._id}>
 
                             <div className='card-body'>{statusOption.post}</div>
                             <div className="card-actions justify-center mb-3">
                                 <Link to='/aboutDetails'>
-                                <button className="btn btn-primary rounded">Details</button>
+                                <button className="btn btn-sm rounded">Details</button>
 
                                 </Link>
                             </div>
 
-                            <td><div className="">
-                                <div className="w-96 rounded-full">
-                                    <img src={statusOption.image} alt="" />
+                            <td>
+                                <div className="">
+                                    <img className=' mx-auto w-full h-[500px]' src={statusOption.image} alt="" />
 
                                 </div>
-                            </div></td>
+                            </td>
                             <hr></hr>
-                            <p className='bg-error-content m-3 d-flex-justify-between'>
-                                <FaHeart></FaHeart>
-                                <p>
-                                    <FaComment></FaComment>
-
-                                </p>
-                            </p>
+                            <div className='text-red-600 flex justify-start gap-2 my-4 mx-2'>
+                            <div >
+                                <FaHeart onClick={onLikeHandle}></FaHeart>
+                                <p>{like}</p>
+                                </div>
+                            <div className='text-gray-500'>
+                            <FaComment></FaComment>
+                            </div>
+                            </div>
+                            
 
 
 
@@ -70,6 +80,7 @@ const Media = () => {
 
             </div>
         </div>
+     </section>
 
 
 

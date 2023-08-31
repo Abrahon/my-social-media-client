@@ -37,7 +37,7 @@ const Home = () => {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
-                            // authorization:
+                           
                         },
                         body: JSON.stringify(media)
 
@@ -61,18 +61,19 @@ const Home = () => {
         <div className='h-[500px] flex justify-center items-center drop-shadow-2xl'>
             <div className='w-96 p-7'>
                 <form onSubmit={handleSubmit(handleMedia)}>
-                    <div className='mt-10'>
-                        <div className="avatar mt-10 gap-5">
-                            <div className="h-10 rounded-3xl ">
+                    <div className='mt-10 '>
+                        <div className=" mb-10 gap-5">
+                            {/* <div className="h-10 rounded-3xl  ">
                                 <img src={img} alt="/" />
-                            </div>
-                            {/* <input type="text" placeholder="Whats on your mind" className="input w-full max-w-xs rounded-2xl" /> */}
-                            <div className="form-control w-full max-w-xs rounded">
+                            </div> */}
+                           
+                            <div className="form-control w-full rounded-full">
 
-                                <input type="text" placeholder='whats on your mind?'  {...register("post", {
-                                    // required: "Name is required"
-                                })}
-                                    className="input input-bordered w-full max-w-xs" />
+                            <textarea className="textarea textarea-accent w-full rounded" placeholder="whats on your mind"  {...register("post", {
+                                   
+                                })}>
+                                
+                                </textarea>
                                 {errors.post && <p className='text-red-500'>{errors.post.message}</p>}
                             </div>
                         </div>
@@ -88,7 +89,7 @@ const Home = () => {
 
                     </div>
                     {/* <Link to='/aboutDetails'> */}
-                    <input className='btn btn-accent w-full mt-4 rounded-xl' value="Submit" type="submit" />
+                    <input className='btn btn-secondary text-red-500 w-full mt-4 rounded-xl' value="Submit" type="submit" />
                     {/* </Link> */}
 
                 </form>

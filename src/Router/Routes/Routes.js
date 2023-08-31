@@ -8,6 +8,7 @@ import Message from "../../Component/Component/Message/Message";
 import SignUp from "../../Component/Component/SignUp/SignUp";
 import Main from "../../Layout/Main";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Edit from "../../Component/Component/About/Edit";
 // import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
@@ -31,6 +32,12 @@ export const router = createBrowserRouter([
             {
                 path:'/about',
                 element:<About></About>
+            },
+            {
+                path:'/edit',
+                element:<Edit></Edit>,
+                loader:({params})=> fetch(`http://localhost:5000/users/${params.id}`)
+
             },
             {    
                 path:'/signup',
